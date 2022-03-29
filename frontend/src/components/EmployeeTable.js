@@ -18,7 +18,9 @@ import {
 } from '@material-ui/core';
 import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_EMPLOYEES } from '../utils/queries';
-import { MUTATION_DELETEEMPLOYEE } from '../utils/mutations'
+import { MUTATION_DELETEEMPLOYEE, MUTATION_UPDATEEMPLOYEE } from '../utils/mutations'
+import { useNavigate } from 'react-router-dom';
+import { CollectionsOutlined } from '@material-ui/icons';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -72,12 +74,14 @@ const style = {
 
 
 function EmployeeTable() {
+    const navigate = useNavigate();
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(15);
     const [formState, setFormState] = useState(null);
 
     const { loading, data } = useQuery(QUERY_EMPLOYEES);
+    const [updateEmployee] = useMutation(MUTATION_UPDATEEMPLOYEE);
     const [openModal, setOpenModal] = useState(false)
 
     const handleChangePage = (event, newPage) => {
@@ -89,13 +93,42 @@ function EmployeeTable() {
         setPage(0);
     };
 
-    const handleOpen = () => {
+    const handleOpen = (row) => {
+        console.log(row);
         setOpenModal(true)
+        setFormState(row)
     }
 
     const handleClose = () => {
         setOpenModal(false)
     }
+
+    const handleModalChange = (event) => {
+        const { name, value } = event.target;
+
+        setFormState({
+            ...formState,
+            [name]: value,
+        })
+    };
+
+    // Need to be able to pass id through update
+    const handleFormSubmit = async (event) => {
+        event.preventDefault()
+        console.log(formState);
+
+        // try {
+            await updateEmployee({
+                variables: { ...formState, id: formState._id }
+            });      
+        // } catch (e) {
+        //     console.error(e);
+        // }
+        setOpenModal(false);
+        setFormState(null)
+        navigate('/employees');
+        window.location.reload();
+    };
 
     const [deleteEmployee, { error }] = useMutation(MUTATION_DELETEEMPLOYEE)
     const firstName = useRef("")
@@ -142,7 +175,7 @@ function EmployeeTable() {
                                 ><IconButton onClick={() => handleDelete(row._id)} aria-label="delete">
                                         <DeleteIcon />
                                     </IconButton>
-                                    <IconButton aria-label="edit" onClick={handleOpen}>
+                                    <IconButton aria-label="edit" onClick={() => handleOpen(row)}>
                                         <EditIcon />
                                     </IconButton>
                                     <Modal
@@ -150,18 +183,18 @@ function EmployeeTable() {
                                         onClose={handleClose}>
                                         <Box sx={{ ...style, width: 200 }}>
                                             <h2 id="child-modal-title">Update Employee Info</h2>
-                                            <form id="child-modal-description">
-                                                <label for="fname">First name:</label>
-                                                <input type="text" id="fname"  ></input>
-                                                <label for="fname">Last name:</label>
-                                                <input type="text" id="fname"  ></input>
+                                            <form id="child-modal-description" onSubmit={handleFormSubmit}>
+                                                <label for="firstName">First name:</label>
+                                                <input type="text" name="firstName" value={formState?.firstName} onChange={handleModalChange}></input>
+                                                <label for="lastName">Last name:</label>
+                                                <input type="text" name="lastName" value={formState?.lastName} onChange={handleModalChange}></input>
                                                 <label for="email">Email:</label>
-                                                <input type="text" id="email"  ></input>
-                                                <label for="phone">Phone:</label>
-                                                <input type="text"   ></input>
-
+                                                <input type="text" name="email" value={formState?.email} onChange={handleModalChange}></input>
+                                                <label for="phoneNumber" >Phone:</label>
+                                                <input type="text" name="phoneNumber" value={formState?.phoneNumber} onChange={handleModalChange}></input>
+                                                <input type='submit' value='Update Employee'></input>
                                             </form>
-                                            <Button onClick={handleClose}>Submit Changes</Button>
+    
                                         </Box>
                                     </Modal>
                                 </Typography>

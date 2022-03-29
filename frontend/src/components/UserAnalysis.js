@@ -1,30 +1,38 @@
-import * as React from 'react';
-import Paper from '@mui/material/Paper';
-import { Chart, ArgumentAxis, ValueAxis, LineSeries, Title, Legend, } from '@devexpress/dx-react-chart-material-ui';
-import { styled } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
-import { ArgumentScale, Animation } from '@devexpress/dx-react-chart';
-import { curveCatmullRom, line, } from 'd3-shape';
-import { scalePoint } from 'd3-scale';
+import * as React from "react";
+import Paper from "@mui/material/Paper";
+import {
+  Chart,
+  ArgumentAxis,
+  ValueAxis,
+  LineSeries,
+  Title,
+  Legend,
+} from "@devexpress/dx-react-chart-material-ui";
+import { styled } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
+import { ArgumentScale, Animation } from "@devexpress/dx-react-chart";
+import { curveCatmullRom, line } from "d3-shape";
+import { scalePoint } from "d3-scale";
 
-import { memberActivity as data } from '../graph-data/data-visualization';
+import { memberActivity as data } from "../graph-data/data-visualization";
 
 // const PREFIX = 'Demo';
 
 const classes = {
-    title: 'Member Activity At Your Gym',
-    chart: 'Members Activity Going to Gym Vs. Held Memberships',
+  title: "Member Activity At Your Gym",
+  chart: "Members Activity Going to Gym Vs. Held Memberships",
 };
 
-const Line = props => (
-    <LineSeries.Path
-        {...props}
-        path={line()
-            .x(({ arg }) => arg)
-            .y(({ val }) => val)
-            .curve(curveCatmullRom)}
-    />
+const Line = (props) => (
+  <LineSeries.Path
+    {...props}
+    path={line()
+      .x(({ arg }) => arg)
+      .y(({ val }) => val)
+      .curve(curveCatmullRom)}
+  />
 );
+
 
 const StyledDiv = styled('div')(() => ({
     [`&.${classes.title}`]: {
@@ -35,44 +43,47 @@ const StyledDiv = styled('div')(() => ({
 }));
 
 const Text = ({ text }) => {
-    const [mainText, subText] = text.split('\\n');
-    return (
-        <StyledDiv className={classes.title}>
-            <Typography component="h3" variant="h5">
-                {mainText}
-            </Typography>
-            <Typography variant="subtitle1">{subText}</Typography>
-        </StyledDiv>
-    );
+  const [mainText, subText] = text.split("\\n");
+  return (
+    <StyledDiv className={classes.title}>
+      <Typography component="h3" variant="h5">
+        {mainText}
+      </Typography>
+      <Typography variant="subtitle1">{subText}</Typography>
+    </StyledDiv>
+  );
 };
 
-const Root = props => (
-    <Legend.Root {...props} sx={{ display: 'flex', margin: 'auto', flexDirection: 'row' }} />
+const Root = (props) => (
+  <Legend.Root
+    {...props}
+    sx={{ display: "flex", margin: "auto", flexDirection: "row" }}
+  />
 );
-const Label = props => (
-    <Legend.Label {...props} sx={{ mb: 1, whiteSpace: 'nowrap' }} />
+const Label = (props) => (
+  <Legend.Label {...props} sx={{ mb: 1, whiteSpace: "nowrap" }} />
 );
-const Item = props => (
-    <Legend.Item {...props} sx={{ flexDirection: 'column-reverse' }} />
+const Item = (props) => (
+  <Legend.Item {...props} sx={{ flexDirection: "column-reverse" }} />
 );
 
 const StyledChart = styled(Chart)(() => ({
-    [`&.${classes.chart}`]: {
-        paddingRight: '30px',
-    },
+  [`&.${classes.chart}`]: {
+    paddingRight: "30px",
+  },
 }));
 
 export default class MemberGraph extends React.PureComponent {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.state = {
-            data,
-        };
-    }
+    this.state = {
+      data,
+    };
+  }
 
-    render() {
-        const { data: chartData } = this.state;
+  render() {
+    const { data: chartData } = this.state;
 
         return (
             <Paper>

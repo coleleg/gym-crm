@@ -73,11 +73,24 @@ mutation deleteMember($id: ID) {
 export const MUTATION_UPDATEMEMBER = gql`
   mutation updateMember($id: ID!, $firstName: String, $lastName: String, $email: String, $phoneNumber: String, $preferredName: String) {
   updateMember(_id: $id, firstName: $firstName, lastName: $lastName, email: $email, phoneNumber: $phoneNumber, preferredName: $preferredName) {
+    _id
     firstName
     lastName
     email
     phoneNumber
     preferredName
+  }
+}
+`
+
+export const MUTATION_UPDATEEMPLOYEE = gql`
+  mutation updateEmployee($id: ID!, $firstName: String, $lastName: String, $email: String, $phoneNumber: String) {
+  updateEmployee(_id: $id, firstName: $firstName, lastName: $lastName, email: $email, phoneNumber: $phoneNumber) {
+    _id
+    firstName
+    lastName
+    email
+    phoneNumber
   }
 }
 `
