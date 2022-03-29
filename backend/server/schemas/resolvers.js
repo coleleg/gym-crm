@@ -156,7 +156,7 @@ const resolvers = {
         updateEmployee: async (_, args, context) => {
             const currentEmployee = await Employee.findOne({ _id: context.employee._id });
             if (currentEmployee && currentEmployee.admin) {
-                return Member.findOneAndUpdate({ _id: args._id }, args, { new: true });
+                return Employee.findOneAndUpdate({ _id: args._id }, args, { new: true });
             }
             throw new AuthenticationError('You need to be an admin to perform this task!');
         },

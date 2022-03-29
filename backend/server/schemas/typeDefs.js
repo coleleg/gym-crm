@@ -88,11 +88,11 @@ scalar Date
         phoneNumber:String!, 
         preferredName: String!): Member
 
-        updateMember(_id:ID!, firstName: String, lastName: String, email: String, phoneNumber: String, preferredName: String): Member!
+        updateMember(_id:ID!, firstName: String, lastName: String, email: String, phoneNumber: String, preferredName: String): Member
 
         deleteMember(_id: ID): Member
 
-        updateEmployee(_id: ID!, firstName: String, lastName: String, email: String, phoneNumber: String): Employee!
+        updateEmployee(_id: ID!, firstName: String, lastName: String, email: String, phoneNumber: String): Employee
 
         deleteEmployee(_id: ID): Employee
 
