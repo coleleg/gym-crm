@@ -33,12 +33,13 @@ const Line = (props) => (
   />
 );
 
-const StyledDiv = styled("div")(() => ({
-  [`&.${classes.title}`]: {
-    textAlign: "center",
-    width: "100%",
-    marginBottom: "10px",
-  },
+
+const StyledDiv = styled('div')(() => ({
+    [`&.${classes.title}`]: {
+        textAlign: 'center',
+        width: 'auto',
+        marginBottom: '100px',
+    },
 }));
 
 const Text = ({ text }) => {
@@ -84,40 +85,30 @@ export default class MemberGraph extends React.PureComponent {
   render() {
     const { data: chartData } = this.state;
 
-    return (
-      <Paper style={{ marginLeft: "150px", marginRight: "15px" }}>
-        <StyledChart
-          style={{ marginRight: "10px" }}
-          data={chartData}
-          className={classes.chart}
-        >
-          <ArgumentScale factory={scalePoint} />
-          <ArgumentAxis />
-          <ValueAxis />
-
-          <LineSeries
-            name="Members Actively Going to Gym"
-            valueField="membersActiveAtGym"
-            argumentField="month"
-            seriesComponent={Line}
-          />
-          <LineSeries
-            name="Memberships to Gym"
-            valueField="gymMemberships"
-            argumentField="month"
-            seriesComponent={Line}
-          />
-
-          <Legend
-            position="bottom"
-            rootComponent={Root}
-            itemComponent={Item}
-            labelComponent={Label}
-          />
-          <Title text="Gym Member Activity in 2021\n" textComponent={Text} />
-          <Animation />
-        </StyledChart>
-      </Paper>
-    );
-  }
+        return (
+            <Paper>
+                <StyledChart
+                    data={chartData}
+                    className={classes.chart}
+                >
+                    <ArgumentScale factory={scalePoint} />
+                    <ArgumentAxis />
+                    <ValueAxis />
+                    <LineSeries
+                        name="Memberships to Gym"
+                        valueField="gymMemberships"
+                        argumentField="month"
+                        seriesComponent={Line}
+                    />
+                    
+                    <Legend position="bottom" rootComponent={Root} itemComponent={Item} labelComponent={Label} />
+                    <Title
+                        text="Gym Member Activity in 2021\n"
+                        textComponent={Text}
+                    />
+                    <Animation />
+                </StyledChart>
+            </Paper>
+        );
+    }
 }
