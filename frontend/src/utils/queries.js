@@ -18,6 +18,7 @@ export const QUERY_GYM = gql`
 export const QUERY_MEMBERS = gql`
 query Query {
     gymMembers {
+        _id
         members {
             _id
             firstName
@@ -32,15 +33,16 @@ query Query {
 `;
 
 export const QUERY_EMPLOYEES = gql`
-    query Query {
-        gymEmployees {
+query GymEmployees {
+    gymEmployees {
+        _id
             employees {
-                _id
                 firstName
                 lastName
                 email
                 phoneNumber
                 admin
+                _id
             }
         }
     }
