@@ -102,9 +102,6 @@ function CustomerTable() {
 
     const [updateMember] = useMutation(MUTATION_UPDATEMEMBER)
 
-
-
-
     const handleOpen = (row) => {
         console.log(row);
         setOpenModal(true);
