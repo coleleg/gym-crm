@@ -3,7 +3,6 @@ import { Grid, Paper, Avatar, Typography, TextField, Button } from '@material-ui
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
 import { useMutation } from '@apollo/client'
 import { MUTATION_GYMINFO } from '../utils/mutations';
-import Auth from '../utils/auth';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -37,9 +36,8 @@ const Signup = () => {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        console.log(formState)
         try {
-            const { data } = await gymInfo({
+            await gymInfo({
                 variables: { ...formState }
             });
 

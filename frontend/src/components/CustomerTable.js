@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Switch from '@mui/material/Switch';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -22,7 +22,6 @@ import { QUERY_MEMBERS } from '../utils/queries';
 import { MUTATION_DELETEMEMBER, MUTATION_UPDATEMEMBER } from '../utils/mutations';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 
 const label = { inputProps: { 'aria-label': 'Switch demo' } };
@@ -89,13 +88,10 @@ function CustomerTable() {
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
-    const [toggleState, setToggleState] = useState(false)
 
 
     const [deleteMember, { error }] = useMutation(MUTATION_DELETEMEMBER)
-    const firstName = useRef("")
     const handleDelete = async (id) => {
-        console.log(id)
         await deleteMember({ variables: { id: id } })
         window.location.reload()
     }
@@ -106,7 +102,6 @@ function CustomerTable() {
 
 
     const handleOpen = (row) => {
-        console.log(row);
         setOpenModal(true);
         setFormData(row)
     }
@@ -126,7 +121,6 @@ function CustomerTable() {
     // Need to be able to pass id through update
     const handleFormSubmit = async (event) => {
         event.preventDefault()
-        console.log(formData)
         // try {
         await updateMember({
             variables: { ...formData, id: formData._id }

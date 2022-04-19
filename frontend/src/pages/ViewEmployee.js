@@ -8,7 +8,7 @@ import Navbar from '../components/DashboardNav'
 export default function ViewEmployee() {
     const navigate = useNavigate();
     const loggedIn = AuthService.loggedIn()
-    console.log(loggedIn)
+
     useEffect(() => {
         if (!loggedIn) {
             navigate('/login-signup')
