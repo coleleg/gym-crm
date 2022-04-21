@@ -1,7 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import ImageCard from "./ImageCard";
-import places from "../static/sellingPoints";
 import useWindowPosition from "../hook/useWindowPosition";
 import sellingPoints from "../static/sellingPoints";
 const useStyles = makeStyles((theme) => ({

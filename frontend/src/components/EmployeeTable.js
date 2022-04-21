@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
@@ -14,13 +14,13 @@ import {
     Grid,
     Typography,
     TablePagination,
-    TableFooter, IconButton, Modal, Box, Button
+    TableFooter, IconButton, Modal, Box
 } from '@material-ui/core';
 import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_EMPLOYEES } from '../utils/queries';
 import { MUTATION_DELETEEMPLOYEE, MUTATION_UPDATEEMPLOYEE } from '../utils/mutations'
 import { useNavigate } from 'react-router-dom';
-import { CollectionsOutlined } from '@material-ui/icons';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -94,7 +94,6 @@ function EmployeeTable() {
     };
 
     const handleOpen = (row) => {
-        console.log(row);
         setOpenModal(true)
         setFormState(row)
     }
@@ -115,12 +114,11 @@ function EmployeeTable() {
     // Need to be able to pass id through update
     const handleFormSubmit = async (event) => {
         event.preventDefault()
-        console.log(formState);
 
         // try {
-            await updateEmployee({
-                variables: { ...formState, id: formState._id }
-            });      
+        await updateEmployee({
+            variables: { ...formState, id: formState._id }
+        });
         // } catch (e) {
         //     console.error(e);
         // }
@@ -131,9 +129,7 @@ function EmployeeTable() {
     };
 
     const [deleteEmployee, { error }] = useMutation(MUTATION_DELETEEMPLOYEE)
-    const firstName = useRef("")
     const handleDelete = async (id) => {
-        console.log(id)
         await deleteEmployee({ variables: { id: id } })
         window.location.reload()
     }
@@ -194,7 +190,7 @@ function EmployeeTable() {
                                                 <input type="text" name="phoneNumber" value={formState?.phoneNumber} onChange={handleModalChange}></input>
                                                 <input type='submit' value='Update Employee'></input>
                                             </form>
-    
+
                                         </Box>
                                     </Modal>
                                 </Typography>

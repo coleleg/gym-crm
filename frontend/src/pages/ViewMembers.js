@@ -8,7 +8,6 @@ import Navbar from '../components/DashboardNav'
 export default function MemberView() {
     const navigate = useNavigate();
     const loggedIn = AuthService.loggedIn()
-    console.log(loggedIn)
     useEffect(() => {
         if (!loggedIn) {
             navigate('/login-signup')

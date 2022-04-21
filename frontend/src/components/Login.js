@@ -4,7 +4,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import { useMutation } from '@apollo/client'
-import { MUTATION_LOGIN, MUTATION_OWNERLOGIN } from '../utils/mutations';
+import { MUTATION_LOGIN } from '../utils/mutations';
 import Auth from '../utils/auth';
 import { useNavigate } from 'react-router-dom';
 import { GlobalContext } from '../store/GlobalProvider';
@@ -43,7 +43,6 @@ const Login = ({ handleChange }) => {
             });
 
             Auth.login(data.login.token);
-            console.log(data.login.token);
         } catch (e) {
             console.error(e);
         }
@@ -82,16 +81,7 @@ const Login = ({ handleChange }) => {
                         label="Remember me"
                     />
                     <Button type='submit' color='primary' variant="contained" style={btnstyle} fullWidth>Sign in</Button>
-                    <Typography >
-                        <Link href="#" >
-                            Forgot password?
-                        </Link>
-                    </Typography>
-                    <Typography > Do you have an account?
-                        <Link href='/login-signup' onClick={handleSignupClick} >
-                            Sign Up
-                        </Link>
-                    </Typography>
+
                 </form>
             </Paper>
         </Grid>

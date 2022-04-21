@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { useMutation } from '@apollo/client';
 import { MUTATION_NEWEMPLOYEE } from '../utils/mutations';
 import { useNavigate } from 'react-router-dom';
-import Auth from '../utils/auth';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -70,7 +69,6 @@ const NewEmployee = () => {
     const navigate = useNavigate();
     const [formState, setFormState] = useState(null);
 
-    console.log(formState)
 
     const [newEmployee, { error }] = useMutation(MUTATION_NEWEMPLOYEE);
 
@@ -121,45 +119,45 @@ const NewEmployee = () => {
     };
     return (
         <div className={classes.root}>
-        <TheList>
-            <h1>New Employee</h1>
-            <UserForm onSubmit={handleFormSubmit}>
-                <UserItem >
-                    <label>First Name</label>
-                    <input name='firstName' type="text" placeholder="John" onChange={handleChange} />
-                </UserItem >
-                <UserItem >
-                    <label>Last Name</label>
-                    <input name='lastName' type="text" placeholder="Smith" onChange={handleChange} />
-                </UserItem>
-                <UserItem >
-                    <label>Email</label>
-                    <input name='email' type="email" placeholder="john@gmail.com" onChange={handleChange} />
-                </UserItem>
-                <UserItem >
-                    <label>Phone Number</label>
-                    <input name='phoneNumber' type="text" placeholder="+1 123 456 78" onChange={handleChange} />
-                </UserItem>
-                <UserItem >
-                    <label>Password</label>
-                    <input name='password' type="password" placeholder="password" onChange={handleChange} />
-                </UserItem>
-                <UserItem>
-                    <FormControl>
-                        <FormLabel id="demo-controlled-radio-buttons-group">Admin</FormLabel>
-                        <RadioGroup name='admin' onChange={handleRadio}>
-                            <FormControlLabel value={true} control={<Radio />} label="True"
+            <TheList>
+                <h1>New Employee</h1>
+                <UserForm onSubmit={handleFormSubmit}>
+                    <UserItem >
+                        <label>First Name</label>
+                        <input name='firstName' type="text" placeholder="John" onChange={handleChange} />
+                    </UserItem >
+                    <UserItem >
+                        <label>Last Name</label>
+                        <input name='lastName' type="text" placeholder="Smith" onChange={handleChange} />
+                    </UserItem>
+                    <UserItem >
+                        <label>Email</label>
+                        <input name='email' type="email" placeholder="john@gmail.com" onChange={handleChange} />
+                    </UserItem>
+                    <UserItem >
+                        <label>Phone Number</label>
+                        <input name='phoneNumber' type="text" placeholder="+1 123 456 78" onChange={handleChange} />
+                    </UserItem>
+                    <UserItem >
+                        <label>Password</label>
+                        <input name='password' type="password" placeholder="password" onChange={handleChange} />
+                    </UserItem>
+                    <UserItem>
+                        <FormControl>
+                            <FormLabel id="demo-controlled-radio-buttons-group">Admin</FormLabel>
+                            <RadioGroup name='admin' onChange={handleRadio}>
+                                <FormControlLabel value={true} control={<Radio />} label="True"
 
-                            />
-                            <FormControlLabel value={false} control={<Radio />} label="False"
+                                />
+                                <FormControlLabel value={false} control={<Radio />} label="False"
 
-                            />
-                        </RadioGroup>
-                    </FormControl>
-                </UserItem>
-                <UserButton>Create</UserButton>
-            </UserForm>
-        </TheList>
+                                />
+                            </RadioGroup>
+                        </FormControl>
+                    </UserItem>
+                    <UserButton>Create</UserButton>
+                </UserForm>
+            </TheList>
         </div>
     )
 };
