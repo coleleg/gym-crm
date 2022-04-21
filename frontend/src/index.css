@@ -1,16 +1,17 @@
-/* * {
-  box-sizing: border-box;
-  font-family: "Nunito";
-  color: white;
+* {
+  /* box-sizing: border-box; */
+  /* font-family: "Nunito"; */
   margin: 0;
-  padding: 0;
-}
+  /* padding: 0;  */
+} 
 
-body {
+
+/* body {
   width: 100%;
   overflow-x: hidden;
-}
-a {
+} */
+
+/* a {
   text-decoration: none;
 }
 @keyframes animateDown {
@@ -29,4 +30,4 @@ a {
   60% {
     transform: translateY(3px);
   }
-} */
+}  */

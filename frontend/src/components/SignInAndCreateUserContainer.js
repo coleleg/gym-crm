@@ -35,7 +35,7 @@ const SignInAndCreateUserContainer = () => {
         setValue(userTab)
     }, [])
 
-    const paperStyle = { width: 340, margin: "20px auto" }
+    const paperStyle = { width: 340, margin: "0 auto" }
     function TabPanel(props) {
         const { children, value, index, ...other } = props;
 
